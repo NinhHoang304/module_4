@@ -19,12 +19,12 @@
         <tr>
             <td>Languages</td>
             <td>
-                <select name="languages">
-                    <option value="1">English</option>
-                    <option value="2">Vietnamese</option>
-<%--                    <option value="3">Japanese</option>--%>
-<%--                    <option value="4">Chinese</option>--%>
-                </select>
+                <form:select path="languages">
+                    <form:option value="1">English</form:option>
+                    <form:option value="2">Vietnamese</form:option>
+                    <form:option value="3">Japanese</form:option>
+                    <form:option value="4">Chinese</form:option>
+                </form:select>
             </td>
         </tr>
         <tr>
@@ -40,13 +40,13 @@
         <tr>
             <td>Spams filter</td>
             <td>
-                <input type="checkbox"> Enable spams filter
+                <form:radiobutton path="spamsFilter" value="true"></form:radiobutton> Enable spams filter
             </td>
         </tr>
         <tr>
             <td>Signature</td>
             <td>
-                <textarea name="signature" id="" cols="30" rows="10"></textarea>
+                <form:textarea path="signature"></form:textarea><br>
             </td>
         </tr>
         <tr>

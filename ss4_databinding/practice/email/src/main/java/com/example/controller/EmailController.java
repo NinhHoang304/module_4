@@ -22,8 +22,13 @@ public class EmailController {
         return new String[]{"5", "10", "15", "25", "50", "100"};
     }
 
-//    @PostMapping("/update")
-//    public String update(@RequestParam("languages") int lang, Model model){
-//
-//    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute("setting") Setting setting, Model model){
+        model.addAttribute("languages", setting.getLanguages());
+        model.addAttribute("pageSize", setting.getPageSize());
+        model.addAttribute("spamsFilter", setting.getSpamsFilter());
+        model.addAttribute("signature", setting.getSignature());
+
+        return "/result";
+    }
 }
