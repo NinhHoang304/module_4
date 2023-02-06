@@ -29,6 +29,16 @@
     </div>
 </nav>
 <!--content-->
+<div id="add">
+    <p>
+        <a th:href="@{/create}">Add new product</a>
+    </p>
+    <div class="notify">
+        <div th:if="${success}">
+            <span th:text="${success}"></span>
+        </div>
+    </div>
+</div>
 <table class="table table-striped">
     <thead>
         <th>#</th>
