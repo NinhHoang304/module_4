@@ -51,7 +51,7 @@ public class ProductController {
     }
 
     //search
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String search(@RequestParam String name, Model model){
         model.addAttribute("productList", this.productService.search(name));
         return "/index";
