@@ -49,4 +49,11 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("mess", "Sửa thành công");
         return "redirect:/";
     }
+
+    //search
+    @GetMapping("/search")
+    public String search(@RequestParam String name, Model model){
+        model.addAttribute("productList", this.productService.search(name));
+        return "/index";
+    }
 }

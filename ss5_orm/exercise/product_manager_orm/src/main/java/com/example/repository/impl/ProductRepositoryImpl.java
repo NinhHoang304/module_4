@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -45,5 +46,19 @@ public class ProductRepositoryImpl implements IProductRepository {
     public void remove(int id) {
         Product product = findById(id);
         entityManager.remove(product);
+    }
+
+    @Override
+    public List<Product> search(String name) {
+//        List<Product> productList = null;
+//        productList = entityManager.createQuery("Select p from Product as p where p.name like :param").setParameter("param","%"+name+"%").getResultList();
+        List<Product>productList=new ArrayList<>();
+        for (Product p:findAll()) {
+            if (p.getName().contains(name)){
+                productList.add(p);
+            }
+        }
+        return productList;
+
     }
 }
