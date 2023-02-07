@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center">Danh sách blog</h1>
+<div>
+    <div style="width: 98%; margin: 0 auto">
+    <span>
+        <button class="btn btn-success">
+            <a th:href="@{/create}">Add new blog</a>
+        </button>
+    </span>
+        <span th:if="${mess}">
+        <span th:text="${mess}" style="color: green"></span>
+    </span>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Action</th>
+        <th>Action</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr th:each="row, rowStat : ${blogList}">
+            <td th:text="${rowStat.count}"></td>
+            <td th:text="${row.name}"></td>
+            <td th:text="${row.content}"></td>
+            <td>View</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:fragment="footer">
+    <p style="text-align: center">@codegym 2020</p>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</html>
