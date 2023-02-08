@@ -1,5 +1,8 @@
 package com.example.create_blog.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,7 +13,7 @@ public class Category {
     private int id;
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     Set<Blog> blogSet;
 
     public Category() {
