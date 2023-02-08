@@ -12,5 +12,6 @@ public interface IBlogService {
     void save(Blog blog);
 
     void delete(int id);
+
     void update(Blog blog);
 }

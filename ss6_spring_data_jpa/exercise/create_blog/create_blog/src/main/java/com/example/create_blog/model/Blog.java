@@ -12,13 +12,32 @@ public class Blog {
     @Column(columnDefinition = "text")
     private String content;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
     public Blog() {
+    }
+
+    public Blog(int id, String name, String content, Category category) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+        this.category = category;
     }
 
     public Blog(int id, String name, String content) {
         this.id = id;
         this.name = name;
         this.content = content;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public int getId() {

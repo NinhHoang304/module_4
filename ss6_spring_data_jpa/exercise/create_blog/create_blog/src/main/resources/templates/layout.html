@@ -16,14 +16,21 @@
 <h1 style="text-align: center">Danh sách blog</h1>
 <div>
     <div style="width: 98%; margin: 0 auto">
-    <span>
-        <button class="btn btn-success">
-            <a th:href="@{/create}">Add new blog</a>
-        </button>
-    </span>
+        <span>
+            <button class="btn btn-success">
+                <a th:href="@{/create}">Add new blog</a>
+            </button>
+        </span>
+
         <span th:if="${mess}">
-        <span th:text="${mess}" style="color: green"></span>
-    </span>
+            <span th:text="${mess}" style="color: green; font-weight: bold"></span>
+        </span>
+
+        <span>
+            <button class="btn btn-success" style="float: right">
+                <a th:href="@{/category}">Category List</a>
+            </button>
+        </span>
     </div>
     <table class="table table-striped">
         <thead>
