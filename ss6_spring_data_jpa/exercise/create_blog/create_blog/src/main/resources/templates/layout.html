@@ -13,39 +13,65 @@
     </style>
 </head>
 <body>
-<h1 style="text-align: center">Danh sách blog</h1>
 <div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" action="">
+                    <input name="nameSearch" th:value="${nameSearch}" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+<div style="margin-top: 10px">
     <div style="width: 98%; margin: 0 auto">
+        <!--        add-->
         <span>
             <button class="btn btn-success">
                 <a th:href="@{/create}">Add new blog</a>
             </button>
         </span>
-
+        <!--        message-->
         <span th:if="${mess}">
             <span th:text="${mess}" style="color: green; font-weight: bold"></span>
         </span>
-
+        <!--        chuyen trang category-->
         <span>
             <button class="btn btn-success" style="float: right">
                 <a th:href="@{/category}">Category List</a>
             </button>
         </span>
     </div>
+    <!--    list-->
     <table class="table table-striped">
         <thead>
         <th>#</th>
         <th>Name</th>
         <th>Content</th>
+        <th>OrderDay</th>
+        <th>Category</th>
         <th>Action</th>
         <th>Action</th>
         <th>Action</th>
         </thead>
         <tbody>
-        <tr th:each="row, rowStat : ${blogList}">
+        <tr th:each="row, rowStat : ${blogPage}">
             <td th:text="${rowStat.count}"></td>
             <td th:text="${row.name}"></td>
             <td th:text="${row.content}"></td>
+            <td th:text="${row.day}"></td>
+            <td th:text="${row.category.getName()}"></td>
             <td>
                 <!-- modal view detail-->
                 <button th:attr="onclick=|infoView('${row.getId()}', '${row.getName()}', '${row.getContent()}')|"
@@ -70,7 +96,12 @@
         </tbody>
     </table>
 </div>
-
+<!--phan trang-->
+<div style="float: right; margin-right: 30px">
+    <a th:href="@{/(page=${blogPage.number -1}, nameSearch=${nameSearch})}" th:if="${blogPage.hasPrevious()}"><button class="btn btn-primary">Previous</button></a>
+    <span th:text="${blogPage.number + 1}"></span> / <span th:text="${blogPage.totalPages}"></span>
+    <a th:href="@{/(page=${blogPage.number +1}, nameSearch=${nameSearch})}" th:if="${blogPage.hasNext()}"><button class="btn btn-primary">Next</button></a>
+</div>
 <div th:fragment="footer">
     <p style="text-align: center">@codegym 2020</p>
 </div>
@@ -136,7 +167,7 @@
         document.getElementById("deleteName").innerText = name;
     }
 
-    function infoView(id, name, content){
+    function infoView(id, name, content) {
         document.getElementById("viewId").value = id;
         document.getElementById("viewName").value = name;
         document.getElementById("viewContent").value = content;

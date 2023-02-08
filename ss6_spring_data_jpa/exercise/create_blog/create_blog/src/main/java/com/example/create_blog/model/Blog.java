@@ -9,6 +9,8 @@ public class Blog {
     private int id;
     private String name;
 
+    private String day;
+
     @Column(columnDefinition = "text")
     private String content;
 
@@ -26,6 +28,14 @@ public class Blog {
         this.category = category;
     }
 
+    public Blog(int id, String name, String day, String content, Category category) {
+        this.id = id;
+        this.name = name;
+        this.day = day;
+        this.content = content;
+        this.category = category;
+    }
+
     public Blog(int id, String name, String content) {
         this.id = id;
         this.name = name;
@@ -38,6 +48,14 @@ public class Blog {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public int getId() {
