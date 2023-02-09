@@ -19,7 +19,6 @@ public class SongDto {
     @NotBlank(message = "Không để trống")
     @Size(min = 1, max = 1000, message = "Không quá 1000 ký tự")
     @Pattern(regexp = "^[a-zA-Z0-9,]+", message = "Không được chứa ký tự đặc biệt trừ dấu phẩy")
-
     private String kind;
 
     public SongDto() {

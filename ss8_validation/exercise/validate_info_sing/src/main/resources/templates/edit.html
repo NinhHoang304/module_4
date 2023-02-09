@@ -27,14 +27,14 @@
         <tr>
           <td>Category: <span th:field="${#fields.hasErrors('kind')}" th:errors="*{kind}" style="color: red"></span></td>
           <td>
-            <textarea th:field="*{kind}" class="form-control" placeholder="King of music.." id="floatingTextarea2" style="height: 150px"></textarea>
+            <textarea th:field="*{kind}" class="form-control" id="floatingTextarea2" style="height: 150px"></textarea>
           </td>
         </tr>
         <tr>
           <td></td>
           <td>
             <button type="reset" class="btn btn-secondary">Reset</button>
-            <button type="submit" class="btn btn-primary">Add Song</button>
+            <button type="submit" class="btn btn-primary">Update Song</button>
           </td>
         </tr>
       </table>
