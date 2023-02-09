@@ -15,7 +15,7 @@ public class UserDto{
     private String phoneNumber;
     @Min(value = 18, message = "Sai cú pháp")
     private int age;
-    @NotBlank
+    @Email(message = "sai cú pháp nhập email")
     private String email;
 
     public UserDto() {
