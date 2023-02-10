@@ -23,6 +23,7 @@ public class SongController {
     public String index(Model model){
         List<Song> songList = this.songService.findAll();
         model.addAttribute("songList", songList);
+        model.addAttribute("songDto", new SongDto());
         return "/index";
     }
 
@@ -47,20 +48,22 @@ public class SongController {
     }
 
     //Edit song
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable int id, Model model){
-        SongDto songDto = new SongDto();
-        BeanUtils.copyProperties(this.songService.findById(id), songDto);
-        model.addAttribute("songDto", songDto);
-        return "/edit";
-    }
+//    @GetMapping("/edit/{id}")
+//    public String edit(@PathVariable int id, Model model){
+//        SongDto songDto = new SongDto();
+//        BeanUtils.copyProperties(this.songService.findById(id), songDto);
+//        model.addAttribute("songDto", songDto);
+//        return "/edit";
+//    }
 
-    @PostMapping("/update")
+    @PostMapping("/edit")
     public String update(@Validated @ModelAttribute SongDto songDto, BindingResult bindingResult, Model model,
                          RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
+            model.addAttribute("songList", this.songService.findAll());
             model.addAttribute("songDto", songDto);
-            return "/edit";
+            model.addAttribute("hasErr", "true");
+            return "/index";
         }
         Song song = new Song();
         BeanUtils.copyProperties(songDto, song);
