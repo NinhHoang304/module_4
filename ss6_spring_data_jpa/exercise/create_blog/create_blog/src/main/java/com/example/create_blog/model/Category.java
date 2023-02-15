@@ -1,5 +1,6 @@
 package com.example.create_blog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,6 +14,7 @@ public class Category {
     private int id;
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
     Set<Blog> blogSet;
 

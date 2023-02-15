@@ -45,6 +45,6 @@ public class ProductController {
             BeanUtils.copyProperties(product, productDto);
             cart.addProduct(productDto);
         }
-        return "redirect:/";
+        return "redirect:/cart";
     }
 }
