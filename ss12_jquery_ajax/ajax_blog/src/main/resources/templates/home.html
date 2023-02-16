@@ -51,7 +51,7 @@
     </div>
 
 <script>
-    showList($("#name").val(), 4);
+    showList($("#name").val(), 1);
     function showList(name, page) {
         let nameSearch = "?name=" + name;
         let pageSize = "&pageSize=" + page;
@@ -76,10 +76,11 @@
         });
     }
     function search(){
-        showList($('#name').val(), 4);
+        showList($('#name').val(), 1);
     }
+
     $(document).ready(function (){
-       let size = 4;
+       let size = 1;
        $('#record').click(function (){
            size++;
            showList($('#name').val(), size);
