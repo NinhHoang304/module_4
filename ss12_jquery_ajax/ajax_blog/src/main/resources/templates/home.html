@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="../static/jquery-3.6.3.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Dev</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input id="name" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="button" onclick="search()">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<h3 style="text-align: center">Blog List</h3>
+<!--list-->
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Day</th>
+        <th>Description</th>
+        <th>Category</th>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</div>
+    <div>
+        <button id="record" value="2" class="btn btn-primary" style="float: right; margin-right: 8px">
+            More
+        </button>
+    </div>
+
+<script>
+    showList($("#name").val(), 4);
+    function showList(name, page) {
+        let nameSearch = "?name=" + name;
+        let pageSize = "&pageSize=" + page;
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "http://localhost:8080/blog" + nameSearch + pageSize,
+            success: function (data) {
+                console.log(data);
+                let content = "";
+                for (let i = 0; i < data.content.length; i++) {
+                    content += `<tr>`
+                    content += `<td>${data.content[i].id}</td>`
+                    content += `<td>${data.content[i].name}</td>`
+                    content += `<td>${data.content[i].day}</td>`
+                    content += `<td>${data.content[i].content}</td>`
+                    content += `<td>${data.content[i].category.name}</td>`
+                    content += `</tr>`
+                }
+                $('#tbody').html(content);
+            }
+        });
+    }
+    function search(){
+        showList($('#name').val(), 4);
+    }
+    $(document).ready(function (){
+       let size = 4;
+       $('#record').click(function (){
+           size++;
+           showList($('#name').val(), size);
+       })
+    });
+</script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</html>

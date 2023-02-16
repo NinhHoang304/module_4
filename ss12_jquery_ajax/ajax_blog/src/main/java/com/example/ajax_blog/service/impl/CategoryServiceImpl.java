@@ -1,0 +1,33 @@
+package com.example.ajax_blog.service.impl;
+
+import com.example.ajax_blog.model.Category;
+import com.example.ajax_blog.repository.ICategoryRepository;
+import com.example.ajax_blog.service.ICategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+@Service
+public class CategoryServiceImpl implements ICategoryService {
+    @Autowired
+    private ICategoryRepository categoryRepository;
+    @Override
+    public List<Category> findAll() {
+        return this.categoryRepository.findAll();
+    }
+
+    @Override
+    public Category findById(int id) {
+        return this.categoryRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Category category) {
+        this.categoryRepository.save(category);
+    }
+
+    @Override
+    public void delete(int id) {
+        this.categoryRepository.deleteById(id);
+    }
+}
