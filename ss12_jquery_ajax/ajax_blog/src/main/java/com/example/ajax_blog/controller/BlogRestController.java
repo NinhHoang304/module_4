@@ -24,7 +24,7 @@ public class BlogRestController {
     // get list
     @GetMapping("")
     public ResponseEntity<Page<Blog>> pagingAndSearch(@RequestParam(required = false, defaultValue = "") String name,
-                                 @RequestParam(required = false,defaultValue = "4") int pageSize){
+                                 @RequestParam(required = false,defaultValue = "1") int pageSize){
         Pageable pageable = PageRequest.of(0,pageSize);
         Page<Blog> blogPage = this.blogService.findByNameContaining(pageable, name);
         if (blogPage.isEmpty()){
