@@ -16,6 +16,7 @@ public class Facility {
     private String descriptionOtherConvenience;
     private double poolArea;
     private int numberOfFloors;
+    private boolean deleted;
     @Column(columnDefinition = "text")
     private String facilityFree;
 
@@ -33,7 +34,10 @@ public class Facility {
     public Facility() {
     }
 
-    public Facility(int id, String name, int area, double cost, int maxPeople, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors, String facilityFree, FacilityType facilityType, RentType rentType, Set<Contract> contractSet) {
+    public Facility(int id, String name, int area, double cost, int maxPeople,
+                    String standardRoom, String descriptionOtherConvenience, double poolArea,
+                    int numberOfFloors, boolean deleted, String facilityFree, FacilityType facilityType,
+                    RentType rentType, Set<Contract> contractSet) {
         this.id = id;
         this.name = name;
         this.area = area;
@@ -43,10 +47,19 @@ public class Facility {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
         this.poolArea = poolArea;
         this.numberOfFloors = numberOfFloors;
+        this.deleted = deleted;
         this.facilityFree = facilityFree;
         this.facilityType = facilityType;
         this.rentType = rentType;
         this.contractSet = contractSet;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public int getId() {

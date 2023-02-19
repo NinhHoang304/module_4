@@ -8,9 +8,13 @@ public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(columnDefinition = "datetime")
     private String startDate;
+    @Column(columnDefinition = "datetime")
     private String endDate;
     private double deposit;
+    private boolean deleted;
+
 
     @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetailSet;
@@ -30,11 +34,13 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(int id, String startDate, String endDate, double deposit, Set<ContractDetail> contractDetailSet, Employee employee, Customer customer, Facility facility) {
+    public Contract(int id, String startDate, String endDate, double deposit, boolean deleted,
+                    Set<ContractDetail> contractDetailSet, Employee employee, Customer customer, Facility facility) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.deposit = deposit;
+        this.deleted = deleted;
         this.contractDetailSet = contractDetailSet;
         this.employee = employee;
         this.customer = customer;
@@ -79,6 +85,14 @@ public class Contract {
 
     public void setContractDetailSet(Set<ContractDetail> contractDetailSet) {
         this.contractDetailSet = contractDetailSet;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public Employee getEmployee() {
