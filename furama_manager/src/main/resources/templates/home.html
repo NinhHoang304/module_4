@@ -15,7 +15,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <div class="d-flex justify-content-start">
-                    <a class="navbar-brand" href="#" style="color: white; font-weight: bold">
+                    <a class="navbar-brand" th:href="@{/}" style="color: white; font-weight: bold">
                         Furama Resort Manager
                     </a>
                 </div>
@@ -54,13 +54,13 @@
                             <div class="d-flex justify-content-start">
                                 <ul class="nav">
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Employee</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Customer</a>
+                                        <a class="nav-link" th:href="@{/customer}">Customer</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Contract</a>
@@ -83,7 +83,11 @@
             <!--End Header Link-->
             <!--Content-->
             <div class="row" style="width: 100%">
-                <div id="content" class="col-12">content</div>
+                <div id="content" class="col-12">
+                    <div class="d-flex justify-content-center" style="margin-top: 250px">
+                        <h3>Welcome to Furama Resort Management</h3>
+                    </div>
+                </div>
             </div>
             <!--End Content-->
         </div>

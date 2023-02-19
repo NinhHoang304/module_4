@@ -1,9 +1,12 @@
 package com.example.furama_manager.model;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Where(clause = "deleted = false")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
