@@ -101,20 +101,22 @@
           <div>
             <table class="table table-striped table-hover">
               <thead>
-              <th>#</th>
-              <th>Name</th>
-              <th>Area</th>
-              <th>Cost</th>
-              <th>Max People</th>
-              <th>Standard Room</th>
-              <th>Description</th>
-              <th>Pool Area</th>
-              <th>Number Of Floor</th>
-              <th>Facility free</th>
-              <th>Rent Type</th>
-              <th>Facility Type</th>
-              <th>Action</th>
-              <th>Action</th>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Area</th>
+                  <th>Cost</th>
+                  <th>Max People</th>
+                  <th>Standard Room</th>
+                  <th>Description</th>
+                  <th>Pool Area</th>
+                  <th>Number Of Floor</th>
+                  <th>Facility free</th>
+                  <th>Rent Type</th>
+                  <th>Facility Type</th>
+                  <th>Action</th>
+                  <th>Action</th>
+                </tr>
               </thead>
               <tbody>
               <tr th:each="facility, rowStat : ${facilityPage}">
@@ -192,7 +194,6 @@
           </button>
         </div>
         <div class="modal-body">
-          <input th:field="*{id}" type="text" hidden>
           <input th:field="*{deleted}" th:value="0" type="text" hidden>
           <input th:field="*{facilityType.id}" id="facilityType" type="text" hidden>
           <div class="row mb-2">
@@ -250,71 +251,79 @@
   </div>
 </div>
 <!-- Modal Edit-->
-<!--<div class="modal fade" id="editCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h1 class="modal-title fs-5" id="exampleModalLabel1">Modal title</h1>-->
-<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <form th:action="@{/customer/edit}" method="post" th:object="${customer}">-->
-<!--        <div class="modal-body">-->
-<!--          <input th:field="*{id}" id="customerId" type="text" hidden>-->
-<!--          <div class="mb-3">-->
-<!--            <label class="form-label">Name:</label>-->
-<!--            <input th:field="*{name}" id="customerName" type="text" class="form-control">-->
-<!--          </div>-->
-<!--          <div class="mb-3">-->
-<!--            <label class="form-label">Date Of Birth:</label>-->
-<!--            <input th:field="*{dayOfBirth}" id="customerDay" type="date" class="form-control">-->
-<!--          </div>-->
-<!--          <div class="form-check form-check-inline">-->
-<!--            <input th:field="*{gender}" th:value="0" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">-->
-<!--            <label class="form-check-label" for="flexRadioDefault1">-->
-<!--              Male-->
-<!--            </label>-->
-<!--          </div>-->
-<!--          <div class="form-check form-check-inline">-->
-<!--            <input th:field="*{gender}" th:value="1" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>-->
-<!--            <label class="form-check-label" for="flexRadioDefault2">-->
-<!--              Female-->
-<!--            </label>-->
-<!--          </div>-->
-<!--          <div class="mb-3">-->
-<!--            <label class="form-label">Id card:</label>-->
-<!--            <input th:field="*{idCard}" id="customerIdCard" type="text" class="form-control">-->
-<!--          </div>-->
-<!--          <div class="mb-3">-->
-<!--            <label class="form-label">Phone number:</label>-->
-<!--            <input th:field="*{phoneNumber}" id="customerPhone" type="text" class="form-control">-->
-<!--          </div>-->
-<!--          <div class="mb-3">-->
-<!--            <label class="form-label">Email</label>-->
-<!--            <input th:field="*{email}" id="customerEmail" type="email" class="form-control" placeholder="name@example.com">-->
-<!--          </div>-->
-<!--          <div class="mb-3">-->
-<!--            <label class="form-label">Address:</label>-->
-<!--            <input th:field="*{address}" id="customerAddress" type="text" class="form-control">-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <label>Customer Type:</label>-->
-<!--            <select th:field="*{customerType.id}" id="customerTypeId" name="customerTypeId" class="form-select" aria-label="Default select example">-->
-<!--              <th:block th:each="customerType : ${customerTypeList}">-->
-<!--                <option th:value="${customerType.id}" th:text="${customerType.name}"></option>-->
-<!--              </th:block>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <input th:field="*{deleted}" th:value="0" type="text" hidden>-->
-<!--          &lt;!&ndash;                end body modal&ndash;&gt;-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--          <button type="submit" class="btn btn-primary">Save changes</button>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<div class="modal fade" id="editCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel1">Facility Edit</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form th:action="@{/facility/edit}" method="post" th:object="${facility}">
+        <div class="modal-body">
+          <input th:field="*{id}" id="idEdit" type="number" hidden>
+          <input th:field="*{deleted}" th:value="0" type="text" hidden>
+          <div class="row mb-2">
+            <span class="col-3">Name:</span>
+            <div class="col-9"><input id="nameEdit" th:field="*{name}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2">
+            <span class="col-3">Area:</span>
+            <div class="col-9"><input id="areaEdit" th:field="*{area}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2">
+            <span class="col-3">Cost:</span>
+            <div class="col-9"><input id="costEdit" th:field="*{cost}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2">
+            <span class="col-3">Max People:</span>
+            <div class="col-9"><input id="maxPeopleEdit" th:field="*{maxPeople}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2" id="standardRoomStyle">
+            <span class="col-3">Standard Room:</span>
+            <div class="col-9"><input id="standardRoomEdit" th:field="*{standardRoom}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2" id="descriptionStyle">
+            <span class="col-3">Description:</span>
+            <div class="col-9"><input id="descriptionEdit" th:field="*{descriptionOtherConvenience}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2" id="poolAreaStyle">
+            <span class="col-3">Pool Area:</span>
+            <div class="col-9"><input id="poolAreaEdit" th:field="*{poolArea}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2" id="numberOfFloorsStyle">
+            <span class="col-3">Number Of Floor:</span>
+            <div class="col-9"><input id="numberOfFloorsEdit" th:field="*{numberOfFloors}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2" id="facilityFreeStyle">
+            <span class="col-3">Facility Free:</span>
+            <div class="col-9"><input id="facilityFreeEdit" th:field="*{facilityFree}" type="text" class="form-control"></div>
+          </div>
+          <div class="row mb-2">
+            <span class="col-3">Rent Type:</span>
+            <div class="col-9">
+              <select th:field="*{rentType.id}" id="rentTypeEdit" class="form-select" aria-label="Default select example">
+                <option th:each="type : ${rentTypeList}" th:value="${type.id}" th:text="${type.name}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <span class="col-3">Facility Type:</span>
+            <div class="col-9">
+              <select th:field="*{facilityType.id}" id="facilityTypeEdit" class="form-select" aria-label="Default select example">
+                <option th:each="type : ${facilityTypeList}" th:value="${type.id}" th:text="${type.name}"></option>
+              </select>
+            </div>
+          </div>
+          <!--                end body modal-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <!-- Modal Delete -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -326,7 +335,7 @@
       <form th:action="@{/facility/delete}" method="post">
         <div class="modal-body">
           <input hidden type="text" id="deleteId" name="deleteId">
-          <span>Do you want to delete this customer </span>
+          <span>Do you want to delete this facility </span>
           <span style="color: red" id="deleteName"></span>
         </div>
         <div class="modal-footer">
@@ -363,6 +372,42 @@
     document.getElementById("poolArea").style.display = "none";
     document.getElementById("numberOfFloors").style.display = "none";
     document.getElementById("facilityFree").style.display = "flex";
+  }
+
+  //edit
+  function getInfoEdit(id, name, area, cost, maxPeople, standardRoom, description
+          ,poolArea, numberOfFloors, facilityFree, rentType, facilityType){
+    document.getElementById("idEdit").value = id;
+    document.getElementById("nameEdit").value = name;
+    document.getElementById("areaEdit").value = area;
+    document.getElementById("costEdit").value = cost;
+    document.getElementById("maxPeopleEdit").value = maxPeople;
+    document.getElementById("standardRoomEdit").value = standardRoom;
+    document.getElementById("descriptionEdit").value = description;
+    document.getElementById("poolAreaEdit").value = poolArea;
+    document.getElementById("numberOfFloorsEdit").value = numberOfFloors;
+    document.getElementById("facilityFreeEdit").value = facilityFree;
+    document.getElementById("facilityTypeEdit").value = facilityType;
+    document.getElementById("rentTypeEdit").value = rentType;
+    if (facilityType == 1){
+      document.getElementById("standardRoomStyle").style.display = "flex";
+      document.getElementById("descriptionStyle").style.display = "flex";
+      document.getElementById("poolAreaStyle").style.display = "flex";
+      document.getElementById("numberOfFloorsStyle").style.display = "flex";
+      document.getElementById("facilityFreeStyle").style.display = "none";
+    } else if (facilityType == 2){
+      document.getElementById("standardRoomStyle").style.display = "flex";
+      document.getElementById("descriptionStyle").style.display = "flex";
+      document.getElementById("poolAreaStyle").style.display = "none";
+      document.getElementById("numberOfFloorsStyle").style.display = "flex";
+      document.getElementById("facilityFreeStyle").style.display = "none";
+    } else if (facilityType == 3){
+      document.getElementById("standardRoomStyle").style.display = "none";
+      document.getElementById("descriptionStyle").style.display = "none";
+      document.getElementById("poolAreaStyle").style.display = "none";
+      document.getElementById("numberOfFloorsStyle").style.display = "none";
+      document.getElementById("facilityFreeStyle").style.display = "flex";
+    }
   }
 
   function getInfoDelete(id, name){

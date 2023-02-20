@@ -50,4 +50,20 @@ public class FacilityController {
         redirectAttributes.addFlashAttribute("mess", "Add Success!");
         return "redirect:/facility";
     }
+
+    @PostMapping("/edit")
+    public String updateFacility(@ModelAttribute Facility facility, RedirectAttributes redirectAttributes){
+        this.facilityService.save(facility);
+        redirectAttributes.addFlashAttribute("mess", "Update Success!");
+        return "redirect:/facility";
+    }
+
+    @PostMapping("/delete")
+    public String deleteFacility(@RequestParam int deleteId, RedirectAttributes redirectAttributes){
+        Facility facility = this.facilityService.findById(deleteId);
+        facility.setDeleted(true);
+        this.facilityService.save(facility);
+        redirectAttributes.addFlashAttribute("mess", "Delete Success");
+        return "redirect:/facility";
+    }
 }
