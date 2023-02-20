@@ -8,6 +8,7 @@ public class CustomerType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(columnDefinition = "varchar(45) unique")
     private String name;
 
     @OneToMany(mappedBy = "customerType")

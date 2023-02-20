@@ -8,6 +8,7 @@ public class FacilityType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(columnDefinition = "varchar(45)", unique = true)
     private String name;
 
     @OneToMany(mappedBy = "facilityType")

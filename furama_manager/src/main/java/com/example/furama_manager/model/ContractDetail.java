@@ -1,12 +1,14 @@
 package com.example.furama_manager.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
     private int quantity;
 
     @ManyToOne

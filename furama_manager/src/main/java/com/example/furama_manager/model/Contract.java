@@ -1,6 +1,7 @@
 package com.example.furama_manager.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -8,10 +9,13 @@ public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "datetime")
+    @NotNull
+    @Column(columnDefinition = "date")
     private String startDate;
-    @Column(columnDefinition = "datetime")
+    @NotNull
+    @Column(columnDefinition = "date")
     private String endDate;
+    @NotNull
     private double deposit;
     private boolean deleted;
 

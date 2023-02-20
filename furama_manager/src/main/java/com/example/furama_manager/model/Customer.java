@@ -3,6 +3,7 @@ package com.example.furama_manager.model;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -11,12 +12,24 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
+    @Column(columnDefinition = "varchar(45)")
     private String name;
+    @NotNull
+    @Column(columnDefinition = "date")
     private String dayOfBirth;
+    @NotNull
+    @Column(columnDefinition = "BIT(1)")
     private boolean gender;
+    @NotNull
+    @Column(columnDefinition = "varchar(45) unique")
     private String idCard;
+    @NotNull
+    @Column(columnDefinition = "varchar(45) unique")
     private String phoneNumber;
+    @Column(columnDefinition = "varchar(45) unique")
     private String email;
+    @Column(columnDefinition = "varchar(45)")
     private String address;
     private boolean deleted;
 

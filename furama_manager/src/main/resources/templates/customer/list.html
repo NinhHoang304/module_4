@@ -127,14 +127,14 @@
                                     <td th:text="${customer.address}"></td>
                                     <td th:text="${customer.customerType.getName()}"></td>
                                     <td>
-                                        <button th:attr=" onclick=|infoEdit('${customer.id}','${customer.name}','${customer.dayOfBirth}'
+                                        <button th:attr=" onclick=|getInfoEdit('${customer.id}','${customer.name}','${customer.dayOfBirth}'
                                         ,'${customer.idCard}','${customer.phoneNumber}','${customer.email}','${customer.address}','${customer.customerType.id}')|"
                                                 type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCustomer">
                                             Edit
                                         </button>
                                     </td>
                                     <td>
-                                        <button th:attr=" onclick=|infoDelete('${customer.id}','${customer.name}')|"
+                                        <button th:attr=" onclick=|getInfoDelete('${customer.id}','${customer.name}')|"
                                                 type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Delete
                                         </button>
@@ -318,7 +318,7 @@
     </div>
 </div>
 <script>
-    function infoEdit(id, name, dayOfBirth, idCard, phoneNumber, email, address, customerType){
+    function getInfoEdit(id, name, dayOfBirth, idCard, phoneNumber, email, address, customerType){
         document.getElementById("customerId").value = id;
         document.getElementById("customerName").value = name;
         document.getElementById("customerDay").value = dayOfBirth;
@@ -329,7 +329,7 @@
         document.getElementById("customerTypeId").value = customerType;
     }
 
-    function infoDelete(id, name){
+    function getInfoDelete(id, name){
         document.getElementById("deleteId").value = id;
         document.getElementById("deleteName").innerText = name;
     }

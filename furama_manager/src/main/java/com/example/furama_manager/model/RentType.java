@@ -8,6 +8,7 @@ public class RentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(columnDefinition = "varchar(45)")
     private String name;
 
     @OneToMany(mappedBy = "rentType")

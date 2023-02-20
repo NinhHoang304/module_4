@@ -1,6 +1,7 @@
 package com.example.furama_manager.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -8,11 +9,16 @@ public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
+    @Column(columnDefinition = "varchar(45)", unique = true)
     private String name;
     private int area;
+    @NotNull
     private double cost;
     private int maxPeople;
+    @Column(columnDefinition = "varchar(45)")
     private String standardRoom;
+    @Column(columnDefinition = "varchar(45)")
     private String descriptionOtherConvenience;
     private double poolArea;
     private int numberOfFloors;

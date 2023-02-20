@@ -1,6 +1,7 @@
 package com.example.furama_manager.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -8,9 +9,15 @@ public class AttachFacility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
+    @Column(columnDefinition = "varchar(45)")
     private String name;
-    private double cost;
+    @Column(nullable = false)
+    private Double cost;
+    @NotNull
+    @Column(columnDefinition = "varchar(10)")
     private String unit;
+    @Column(columnDefinition = "varchar(45)")
     private String status;
 
     @OneToMany(mappedBy = "attachFacility")
