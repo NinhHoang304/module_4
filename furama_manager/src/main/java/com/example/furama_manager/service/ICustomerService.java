@@ -16,5 +16,4 @@ public interface ICustomerService {
     Customer findById(int id);
 
     void save(Customer customer);
-
 }
