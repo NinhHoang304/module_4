@@ -36,7 +36,14 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public void save(Customer customer) {
-        this.customerRepository.save(customer);
+    public boolean save(Customer customer) {
+        if (this.customerRepository.findByIdCard(customer.getIdCard()) != null
+        || this.customerRepository.findByPhoneNumber(customer.getPhoneNumber()) != null
+        || this.customerRepository.findByEmail(customer.getEmail()) != null){
+            return true;
+        }
+        return false;
     }
+
+
 }

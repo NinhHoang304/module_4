@@ -12,4 +12,9 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
 
     Page<Customer> findByCustomerTypeId(int customerTypeId, Pageable pageable);
 
+    Customer findByIdCard(String idCard);
+
+    Customer findByPhoneNumber(String phoneNumber);
+
+    Customer findByEmail(String email);
 }

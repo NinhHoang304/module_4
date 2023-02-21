@@ -15,5 +15,7 @@ public interface ICustomerService {
 
     Customer findById(int id);
 
-    void save(Customer customer);
+//    Customer save(Customer customer);
+    boolean save(Customer customer);
+
 }

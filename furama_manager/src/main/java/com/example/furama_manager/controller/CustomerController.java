@@ -45,8 +45,11 @@ public class CustomerController {
 
     @PostMapping("/create")
     public String addCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes){
-        this.customerService.save(customer);
-        redirectAttributes.addFlashAttribute("mess", "Add Success!");
+        if (this.customerService.save(customer)){
+            redirectAttributes.addFlashAttribute("mess", "Duplicate error, please try again!");
+        }else {
+            redirectAttributes.addFlashAttribute("mess", "Create Success!");
+        }
         return "redirect:/customer";
     }
 
