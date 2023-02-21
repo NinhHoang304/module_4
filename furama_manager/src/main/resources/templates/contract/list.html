@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Contract List</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}" />
-    <link rel="stylesheet" href="../../static/bootstrap-5.3.0/css/bootstrap.min.css" th:href="@{/bootstrap-5.3.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="../../static/bootstrap-5.3.0/css/bootstrap.min.css"
+          th:href="@{/bootstrap-5.3.0/css/bootstrap.min.css}">
 
 </head>
 <body style="cursor: auto; background-color: #eff2f4">
@@ -70,16 +71,16 @@
                                     </li>
                                 </ul>
                             </div>
-<!--                            <div>-->
-<!--                                <form action="" method="get" class="d-flex" role="search">-->
-<!--                                    <select name="facilityTypeId" class="form-select" aria-label="Default select example">-->
-<!--                                        <option value="">All Facility Type</option>-->
-<!--                                        <option  th:each="type : ${facilityTypeList}" th:value="${type.id}" th:text="${type.name}"></option>-->
-<!--                                    </select>-->
-<!--                                    <input name="keyword" value="" class="form-control me-2" type="search" placeholder="Name" aria-label="Search" style="margin-left: 5px">-->
-<!--                                    <button class="btn btn btn-outline-light" type="submit">Search</button>-->
-<!--                                </form>-->
-<!--                            </div>-->
+                            <!--                            <div>-->
+                            <!--                                <form action="" method="get" class="d-flex" role="search">-->
+                            <!--                                    <select name="facilityTypeId" class="form-select" aria-label="Default select example">-->
+                            <!--                                        <option value="">All Facility Type</option>-->
+                            <!--                                        <option  th:each="type : ${facilityTypeList}" th:value="${type.id}" th:text="${type.name}"></option>-->
+                            <!--                                    </select>-->
+                            <!--                                    <input name="keyword" value="" class="form-control me-2" type="search" placeholder="Name" aria-label="Search" style="margin-left: 5px">-->
+                            <!--                                    <button class="btn btn btn-outline-light" type="submit">Search</button>-->
+                            <!--                                </form>-->
+                            <!--                            </div>-->
                         </div>
                     </nav>
                 </div>
@@ -120,13 +121,15 @@
                                 <td th:text="${contract.total}"></td>
                                 <td>
                                     <button th:attr="onclick=|getContractId('${contract.contractId}')|"
-                                            type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
                                         +
                                     </button>
                                 </td>
                                 <td>
                                     <a th:href="@{/contract/detail(id=${contract.contractId})}">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal2">
                                             Attach Facility Detail
                                         </button>
                                     </a>
@@ -137,10 +140,12 @@
                     </div>
                     <!--Pagination-->
                     <div style="float: right; margin-right: 15px">
-                        <a th:href="@{/contract/(page=${contractPage.number - 1})}" th:if="${contractPage.hasPrevious()}">
+                        <a th:href="@{/contract/(page=${contractPage.number - 1})}"
+                           th:if="${contractPage.hasPrevious()}">
                             <button class="btn btn-primary">Previous</button>
                         </a>
-                        <span th:text="${contractPage.number + 1}"></span> / <span th:text="${contractPage.totalPages}"></span>
+                        <span th:text="${contractPage.number + 1}"></span> / <span
+                            th:text="${contractPage.totalPages}"></span>
                         <a th:href="@{/contract/(page=${contractPage.number + 1})}" th:if="${contractPage.hasNext()}">
                             <button class="btn btn-primary">Next</button>
                         </a>
@@ -170,8 +175,10 @@
                     <div class="row mb-2">
                         <span class="col-3">Attach Facility:</span>
                         <div class="col-9">
-                            <select th:field="*{attachFacility.id}" class="form-select" aria-label="Default select example">
-                                <option th:each="attFacility : ${attachFacilityList}" th:value="${attFacility.id}" th:text="${attFacility.name}"></option>
+                            <select th:field="*{attachFacility.id}" class="form-select"
+                                    aria-label="Default select example">
+                                <option th:each="attFacility : ${attachFacilityList}" th:value="${attFacility.id}"
+                                        th:text="${attFacility.name}"></option>
                             </select>
                         </div>
                     </div>
@@ -190,52 +197,51 @@
 </div>
 <!-- Modal View Detail Attach Facility-->
 <div th:class="${hasTrue=='true'? 'modal fade show':'modal fade'}"
-     th:style="${hasTrue =='true' ?'display:block':'display:none'}" class="modal fade" id="exampleModal2" tabindex="-1"
+     th:style="${hasTrue =='true' ?'display:block':'display:none'}"
+     class="modal fade" id="exampleModal2" tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel2">Attach Detail</h1>
             </div>
-                <div class="modal-body">
-<!--                    <div th:each="row : ${contractDetailList}" class="row mb-2">-->
-<!--                        <label class="col-4"><span th:text="${row.attachFacility.name}"></span></label>-->
-<!--                        <div class="col-8"><input readonly th:value="${row.quantity}" type="text"></div>-->
-<!--                    </div>-->
-                    <table class="table table-striped table-hover">
-                        <tr>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Unit</th>
-                            <th>Cost</th>
-                            <th>Status</th>
-                        </tr>
-                        <tr th:each="row : ${contractDetailList}">
-                            <td th:text="${row.attachFacility.name}"></td>
-                            <td th:text="${row.quantity}"></td>
-                            <td th:text="${row.attachFacility.unit}"></td>
-                            <td th:text="${row.attachFacility.cost}"></td>
-                            <td th:text="${row.attachFacility.status}"></td>
-                        </tr>
-                    </table>
+            <div class="modal-body">
+                <!--                    <div th:each="row : ${contractDetailList}" class="row mb-2">-->
+                <!--                        <label class="col-4"><span th:text="${row.attachFacility.name}"></span></label>-->
+                <!--                        <div class="col-8"><input readonly th:value="${row.quantity}" type="text"></div>-->
+                <!--                    </div>-->
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Cost</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr th:each="row : ${contractDetailList}">
+                        <td th:text="${row.attachFacility.name}"></td>
+                        <td th:text="${row.quantity}"></td>
+                        <td th:text="${row.attachFacility.unit}"></td>
+                        <td th:text="${row.attachFacility.cost}"></td>
+                        <td th:text="${row.attachFacility.status}"></td>
+                    </tr>
+                </table>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <a th:href="@{/contract}" style="color: white; text-decoration: none">Close</a>
                     </button>
                 </div>
+            </div>
         </div>
     </div>
 </div>
-
 <script>
-    function getContractId(contractId){
+    function getContractId(contractId) {
         document.getElementById("contractId").value = contractId;
     }
-
-    function getContractIdView(contractId){
-        document.getElementById("contractIdView").value = contractId;
-    }
 </script>
+
 </body>
-<script src="../../static/bootstrap-5.3.0/js/bootstrap.min.js" th:src="@{/bootstrap-5.3.0/js/bootstrap.min.js}"></script>
+<script src="../../static/bootstrap-5.3.0/js/bootstrap.min.js"
+        th:src="@{/bootstrap-5.3.0/js/bootstrap.min.js}"></script>
 </html>
