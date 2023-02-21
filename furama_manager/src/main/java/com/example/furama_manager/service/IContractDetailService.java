@@ -8,4 +8,6 @@ public interface IContractDetailService {
     List<ContractDetail> findAll();
 
     void save(ContractDetail contractDetail);
+
+    List<ContractDetail> findContractDetailByContractId(int id);
 }

@@ -19,4 +19,9 @@ public class ContractDetailServiceImpl implements IContractDetailService {
     public void save(ContractDetail contractDetail) {
         this.contractDetailRepository.save(contractDetail);
     }
+
+    @Override
+    public List<ContractDetail> findContractDetailByContractId(int id) {
+        return this.contractDetailRepository.findContractDetailByContractId(id);
+    }
 }

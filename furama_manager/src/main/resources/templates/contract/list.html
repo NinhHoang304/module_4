@@ -125,9 +125,11 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                        Attach Facility Detail
-                                    </button>
+                                    <a th:href="@{/contract/detail(id=${contract.contractId})}">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                            Attach Facility Detail
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>
@@ -187,22 +189,40 @@
     </div>
 </div>
 <!-- Modal View Detail Attach Facility-->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div th:class="${hasTrue=='true'? 'modal fade show':'modal fade'}"
+     th:style="${hasTrue =='true' ?'display:block':'display:none'}" class="modal fade" id="exampleModal2" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel2">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="exampleModalLabel2">Attach Detail</h1>
             </div>
-            <form th:action="@{contract/detail}" method="post">
                 <div class="modal-body">
-                    ...
-                </div>
+<!--                    <div th:each="row : ${contractDetailList}" class="row mb-2">-->
+<!--                        <label class="col-4"><span th:text="${row.attachFacility.name}"></span></label>-->
+<!--                        <div class="col-8"><input readonly th:value="${row.quantity}" type="text"></div>-->
+<!--                    </div>-->
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Unit</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr th:each="row : ${contractDetailList}">
+                            <td th:text="${row.attachFacility.name}"></td>
+                            <td th:text="${row.quantity}"></td>
+                            <td th:text="${row.attachFacility.unit}"></td>
+                            <td th:text="${row.attachFacility.cost}"></td>
+                            <td th:text="${row.attachFacility.status}"></td>
+                        </tr>
+                    </table>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <a th:href="@{/contract}" style="color: white; text-decoration: none">Close</a>
+                    </button>
                 </div>
-            </form>
         </div>
     </div>
 </div>
@@ -210,6 +230,10 @@
 <script>
     function getContractId(contractId){
         document.getElementById("contractId").value = contractId;
+    }
+
+    function getContractIdView(contractId){
+        document.getElementById("contractIdView").value = contractId;
     }
 </script>
 </body>

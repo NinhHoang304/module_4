@@ -29,7 +29,8 @@ public class ContractController {
     private IContractDetailService contractDetailService;
 
     @GetMapping("")
-    public String getAll(Model model, @RequestParam(defaultValue = "0") int page){
+    public String getAll(Model model,
+                         @RequestParam(defaultValue = "0") int page){
         Pageable pageable = PageRequest.of(page, 4);
         Page<IContractDto> contractPage = this.contractService.getAllContracts(pageable);
         model.addAttribute("contractPage", contractPage);
@@ -39,6 +40,17 @@ public class ContractController {
         model.addAttribute("contractDetail", new ContractDetail());
         return "/contract/list";
     }
+    @GetMapping("/detail")
+    public String getContractDetail(@RequestParam int id, Model model, RedirectAttributes redirectAttributes){
+        List<ContractDetail> contractDetailList = this.contractDetailService.findContractDetailByContractId(id);
+        if (contractDetailList != null){
+            redirectAttributes.addFlashAttribute("contractDetailList", contractDetailList);
+            redirectAttributes.addFlashAttribute("hasTrue", "true");
+            return "redirect:/contract";
+        }
+        return "redirect:/contract";
+    }
+
 
     @PostMapping("/create")
     public String addContractDetail(@ModelAttribute ContractDetail contractDetail, RedirectAttributes redirectAttributes){
