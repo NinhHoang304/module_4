@@ -1,5 +1,7 @@
 package com.example.furama_manager.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -19,7 +21,7 @@ public class Contract {
     private double deposit;
     private boolean deleted;
 
-
+    @JsonBackReference
     @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetailSet;
 
@@ -49,6 +51,10 @@ public class Contract {
         this.employee = employee;
         this.customer = customer;
         this.facility = facility;
+    }
+
+    public Contract(int id) {
+        this.id = id;
     }
 
     public int getId() {

@@ -9,6 +9,8 @@ import java.util.List;
 public interface IFacilityService {
     Page<Facility> getAllAndSearch(String name, String id, Pageable pageable);
 
+    List<Facility> findAll();
+
     Facility findById(int id);
 
     void save(Facility facility);

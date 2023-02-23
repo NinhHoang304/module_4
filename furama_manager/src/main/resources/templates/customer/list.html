@@ -280,7 +280,7 @@
                     </div>
                     <div>
                         <label>Customer Type:</label>
-                        <select th:field="*{customerType.id}" id="customerTypeId" name="customerTypeId" class="form-select" aria-label="Default select example">
+                        <select th:field="*{customerType.id}" id="customerTypeId" class="form-select" aria-label="Default select example">
                             <th:block th:each="customerType : ${customerTypeList}">
                                 <option th:value="${customerType.id}" th:text="${customerType.name}"></option>
                             </th:block>

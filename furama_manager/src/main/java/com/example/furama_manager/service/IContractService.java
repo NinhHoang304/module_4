@@ -7,4 +7,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface IContractService {
     Page<IContractDto> getAllContracts(Pageable pageable);
+
+    Contract findById(int id);
+
+    void save(Contract contract);
 }

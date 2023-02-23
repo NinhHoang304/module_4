@@ -18,4 +18,14 @@ public class ContractServiceImpl implements IContractService {
     public Page<IContractDto> getAllContracts(Pageable pageable) {
         return this.contractRepository.getAllContracts(pageable);
     }
+
+    @Override
+    public Contract findById(int id) {
+        return this.contractRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Contract contract) {
+        this.contractRepository.save(contract);
+    }
 }

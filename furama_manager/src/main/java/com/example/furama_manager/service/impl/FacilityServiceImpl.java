@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
+import java.util.List;
 
 @Service
 public class FacilityServiceImpl implements IFacilityService {
@@ -17,6 +18,11 @@ public class FacilityServiceImpl implements IFacilityService {
     @Override
     public Page<Facility> getAllAndSearch(String name, String id, Pageable pageable) {
         return this.facilityRepository.findByNameAndFacilityTypeAndDeletedFalse(name, id, pageable);
+    }
+
+    @Override
+    public List<Facility> findAll() {
+        return this.facilityRepository.findAll();
     }
 
     @Override
