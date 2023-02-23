@@ -15,7 +15,7 @@ public interface IContractRepository extends JpaRepository<Contract, Integer> {
             "       contract.start_date                                                                          as startDate,\n" +
             "       contract.end_date                                                                            as endDate,\n" +
             "       contract.deposit                                                                             as deposit,\n" +
-            "       (sum(ifnull(attach_facility.cost, 0) * ifnull(contract_detail.quantity, 0) + facility.cost)) as total\n" +
+            "       (sum(ifnull(attach_facility.cost, 0) * ifnull(contract_detail.quantity, 0)) + facility.cost) as total\n" +
             " from `contract`\n" +
             "         left join `facility` on contract.facility_id = facility.id\n" +
             "         left join `customer` on contract.customer_id = customer.id\n" +

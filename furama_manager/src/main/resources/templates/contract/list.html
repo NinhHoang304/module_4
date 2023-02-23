@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/style.css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="../../static/bootstrap-5.3.0/css/bootstrap.min.css"
           th:href="@{/bootstrap-5.3.0/css/bootstrap.min.css}">
-
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 <body style="cursor: auto; background-color: #eff2f4">
 <div class="w-100" style="min-height: 300px; background-color: #5e72e4; position: absolute;"></div>
@@ -243,38 +244,39 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel3">Create Contract</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/contract/add}" method="post" th:object="${contract}">
-                <input type="text" hidden th:field="*{id}">
+            <form onchange="calculateTotal()">
                 <div class="modal-body">
                     <div class="row mb-2">
                         <span class="col-3">Start Date:</span>
-                        <div class="col-9"><input th:field="*{startDate}" type="date" class="form-control"></div>
+                        <div class="col-9"><input id="startDate" type="date" class="form-control"></div>
                     </div>
                     <div class="row mb-2">
                         <span class="col-3">End Date:</span>
-                        <div class="col-9"><input th:field="*{endDate}" type="date" class="form-control"></div>
+                        <div class="col-9"><input id="endDate" type="date" class="form-control"></div>
                     </div>
                     <div class="row mb-2">
                         <span class="col-3">Deposit:</span>
-                        <div class="col-9"><input th:field="*{deposit}" type="text" class="form-control"></div>
+                        <div class="col-9"><input id="deposit" type="text" class="form-control"></div>
                     </div>
                     <div class="row mb-2">
                         <span class="col-3">Total Cost:</span>
-                        <div class="col-9"><input readonly class="form-control"></div>
+                        <div class="col-9"><input id="totalCost" readonly class="form-control"></div>
                     </div>
                     <div class="row mb-2">
                         <span class="col-3">Customer:</span>
                         <div class="col-9">
-                            <select th:field="*{customer.id}" class="form-select" aria-label="Default select example">
-                                <option th:each="row : ${customerList}" th:value="${row.id}" th:text="${row.name}"></option>
+                            <select id="customerId" class="form-select" aria-label="Default select example">
+                                <option th:each="row : ${customerList}" th:value="${row.id}"
+                                        th:text="${row.name}"></option>
                             </select>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <span class="col-3">Facility:</span>
                         <div class="col-9">
-                            <select th:field="*{facility.id}" class="form-select" aria-label="Default select example">
-                                <option th:each="row : ${facilityList}" th:value="${row.id}" th:text="${row.name}"></option>
+                            <select id="facilityId" class="form-select" aria-label="Default select example">
+                                <option th:each="row : ${facilityList}" th:value="${row.id}" th:data-cost="${row.cost}"
+                                        th:text="${row.name}"></option>
                             </select>
                         </div>
                     </div>
@@ -286,16 +288,17 @@
                     </div>
                     <div style="display: none" id="attFacility">
                         <th:block th:each="row : ${attachFacilityList}">
-                            <div class="row">
+                            <div class="row checkbox-list">
                                 <div class="col-3"></div>
                                 <div class="col-5">
-                                    <input th:value="${row.id}" th:text="${row.name}" type="checkbox" class="form-check-input">
+                                    <input th:value="${row.id}" th:text="${row.name}" th:data-cost="${row.cost}" type="checkbox"
+                                           class="form-check-input checkbox">
                                 </div>
                                 <div class="col-2">
                                     <span>Quantity:</span>
                                 </div>
                                 <div class="col-2">
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control quantity" min="1" value="1">
                                 </div>
                             </div>
                         </th:block>
@@ -303,13 +306,84 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" onclick="showFormAddNewContract()" id="buttonCreate" class="btn btn-primary">
+                        Save changes
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <script>
+    function calculateTotal() {
+        let selectedOption = parseFloat($("#facilityId option:selected").data("cost"));
+        let checkboxes = document.querySelectorAll(".checkbox");
+        let quantities = document.querySelectorAll(".quantity");
+
+        let total = selectedOption;
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                let checkbox = checkboxes[i].dataset.cost;
+                let quantity = parseInt(quantities[i].value);
+                let price = parseFloat(checkbox);
+                total += quantity * price;
+            }
+        }
+        document.getElementById("totalCost").value = total;
+    }
+
+    function showFormAddNewContract() {
+        let startDate = $('#startDate').val();
+        let endDate = $('#endDate').val();
+        let deposit = $('#deposit').val();
+        let facilityId = $('#facilityId').val();
+        let customerId = $('#customerId').val();
+        let newContractDto = {
+            startDate: startDate,
+            endDate: endDate,
+            deposit: deposit,
+            facility: {
+                id: facilityId
+            },
+            customer: {
+                id: customerId
+            }
+        }
+        debugger
+        let checkboxes = document.querySelectorAll('.checkbox-list .checkbox');
+        let quantities = document.querySelectorAll('.checkbox-list .quantity');
+
+        let contractDetailDtoList = [];
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                let contractDetailDto = {
+                    contractDto : newContractDto,
+                    attachFacility: {
+                        id: checkboxes[i].value
+                    },
+                    quantity: quantities[i].value
+                };
+                contractDetailDtoList.push(contractDetailDto);
+            }
+        }
+        debugger
+
+        $.ajax({
+            headers:{
+                'Accept':'application/json',
+                'Content-type': 'application/json'
+            },
+            type: 'POST',
+            url: "http://localhost:8080/api/contract/save",
+            data: JSON.stringify(contractDetailDtoList),
+
+            success: function () {
+                debugger
+                window.location.reload();
+            },
+        })
+    }
+
     function getContractId(contractId) {
         document.getElementById("contractId").value = contractId;
     }
