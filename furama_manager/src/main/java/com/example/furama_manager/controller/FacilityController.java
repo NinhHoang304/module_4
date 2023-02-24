@@ -31,10 +31,10 @@ public class FacilityController {
     public String getAll(Model model,
                          @RequestParam(defaultValue = "0") int page,
                          @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
-                         @RequestParam(name = "facilityTypeId", required = false, defaultValue = "") String id
+                         @RequestParam(name = "facilityTypeName", required = false, defaultValue = "") String facilityTypeName
                          ){
         Pageable pageable = PageRequest.of(page, 4);
-        Page<Facility> facilityPage = this.facilityService.getAllAndSearch(keyword, id, pageable);
+        Page<Facility> facilityPage = this.facilityService.getAllFacilityByQuery(keyword, facilityTypeName, pageable);
         List<FacilityType> facilityTypeList = this.facilityTypeService.findAll();
         List<RentType> rentTypeList = this.rentTypeService.findAll();
         model.addAttribute("facilityPage", facilityPage);

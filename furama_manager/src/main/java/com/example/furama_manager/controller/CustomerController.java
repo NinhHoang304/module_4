@@ -28,14 +28,9 @@ public class CustomerController {
     public String getAllCustomers(Model model,
                                   @RequestParam(defaultValue = "0") int page,
                                   @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
-                                  @RequestParam(name = "customerTypeId", required = false) Integer customerTypeId){
+                                  @RequestParam(name = "customerTypeName", required = false, defaultValue = "") String customerTypeName){
         Pageable pageable = PageRequest.of(page, 4);
-        Page<Customer> customerPage;
-        if (customerTypeId != null){
-            customerPage = this.customerService.findByCustomerTypeId(customerTypeId, pageable);
-        }else {
-            customerPage = this.customerService.search(keyword, pageable);
-        }
+        Page<Customer> customerPage = this.customerService.getCustomerByQuery(keyword, customerTypeName, pageable);
         model.addAttribute("customerPage", customerPage);
         List<CustomerType> customerTypeList = this.customerTypeService.getAllCustomerType();
         model.addAttribute("customerTypeList", customerTypeList);
@@ -45,17 +40,26 @@ public class CustomerController {
 
     @PostMapping("/create")
     public String addCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes){
-        if (this.customerService.save(customer)){
-            redirectAttributes.addFlashAttribute("mess", "Duplicate error, please try again!");
-        }else {
-            redirectAttributes.addFlashAttribute("mess", "Create Success!");
+        String checkDuplicate = this.customerService.checkDuplicate(customer.getEmail(), customer.getPhoneNumber(), customer.getIdCard());
+        if (checkDuplicate != null){
+            redirectAttributes.addFlashAttribute("error", checkDuplicate);
+            redirectAttributes.addFlashAttribute("hasErr", "true");
+            return "redirect:/customer";
         }
+        boolean check = this.customerService.save(customer);
+        if (!check){
+            redirectAttributes.addFlashAttribute("mess", "Not Success, please try again!");
+        }
+        redirectAttributes.addFlashAttribute("mess", "Create Success!");
         return "redirect:/customer";
     }
 
     @PostMapping("/edit")
     public String updateCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes){
-        this.customerService.save(customer);
+        boolean check = this.customerService.save(customer);
+        if (!check){
+            redirectAttributes.addFlashAttribute("mess", "Not Success, please try again!");
+        }
         redirectAttributes.addFlashAttribute("mess", "Update Success!");
         return "redirect:/customer";
     }

@@ -16,6 +16,11 @@ public class CustomerServiceImpl implements ICustomerService {
     private ICustomerRepository customerRepository;
 
     @Override
+    public Page<Customer> getCustomerByQuery(String keyword, String customerTypeName, Pageable pageable) {
+        return this.customerRepository.getCustomerByQuery(keyword, keyword, customerTypeName, pageable);
+    }
+
+    @Override
     public Page<Customer> search(String keyword, Pageable pageable) {
         return this.customerRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(keyword, keyword, pageable);
     }
@@ -37,13 +42,27 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public boolean save(Customer customer) {
-        if (this.customerRepository.findByIdCard(customer.getIdCard()) != null
-        || this.customerRepository.findByPhoneNumber(customer.getPhoneNumber()) != null
-        || this.customerRepository.findByEmail(customer.getEmail()) != null){
+        if (customer != null){
+            this.customerRepository.save(customer);
             return true;
         }
         return false;
     }
 
-
+    @Override
+    public String checkDuplicate(String email, String phoneNumber, String idCard) {
+        List<Customer> customerList = this.customerRepository.findAll();
+        for (Customer item : customerList){
+            if (item.getEmail().equals(email)){
+                return "Error, email is duplicate!";
+            }
+            if (item.getPhoneNumber().equals(phoneNumber)){
+                return "Error, phone number is duplicate!";
+            }
+            if (item.getIdCard().equals(idCard)){
+                return "Error, Id card is duplicate!";
+            }
+        }
+        return null;
+    }
 }

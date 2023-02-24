@@ -15,6 +15,12 @@ import java.util.List;
 public class FacilityServiceImpl implements IFacilityService {
     @Autowired
     private IFacilityRepository facilityRepository;
+
+    @Override
+    public Page<Facility> getAllFacilityByQuery(String name, String facilityTypeName, Pageable pageable) {
+        return this.facilityRepository.getAllFacilityByQuery(name, facilityTypeName, pageable);
+    }
+
     @Override
     public Page<Facility> getAllAndSearch(String name, String id, Pageable pageable) {
         return this.facilityRepository.findByNameAndFacilityTypeAndDeletedFalse(name, id, pageable);

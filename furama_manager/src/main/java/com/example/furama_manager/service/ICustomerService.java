@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ICustomerService {
+    Page<Customer> getCustomerByQuery(String keyword, String customerTypeName, Pageable pageable);
     Page<Customer> search(String keyword, Pageable pageable);
 
     Page<Customer> findByCustomerTypeId(int customerTypeId, Pageable pageable);
@@ -15,7 +16,7 @@ public interface ICustomerService {
 
     Customer findById(int id);
 
-//    Customer save(Customer customer);
     boolean save(Customer customer);
 
+    String checkDuplicate(String email, String phoneNumber, String idCard);
 }
