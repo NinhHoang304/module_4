@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Random;
 
@@ -67,7 +69,20 @@ public class ContractController {
     @PostMapping("/add")
     public String addAtt(@ModelAttribute Contract contract,
                       @ModelAttribute ContractDetail contractDetail,
-                      Model model){
+                      RedirectAttributes redirectAttributes){
+        Contract contract1 = this.contractService.findById(contract.getId());
+        String checkInDate = contract1.getStartDate();
+        String checkOutDate = contract1.getEndDate();
+        LocalDate startDate = LocalDate.parse(checkInDate);
+        LocalDate endDate = LocalDate.parse(checkOutDate);
+        LocalDate currentDate = LocalDate.now();
+        int yearOfStartDate = Period.between(startDate, currentDate).getYears();
+        int yearOfEndDate = Period.between(endDate, currentDate).getYears();
+        if (yearOfStartDate < yearOfEndDate){
+            redirectAttributes.addFlashAttribute("checkDate", "Start date không được nhỏ hơn End date");
+            redirectAttributes.addFlashAttribute("hasErr", "true");
+            return "redirect:/contract";
+        }
         this.contractService.save(contract);
         contractDetail.setContract(contract);
         this.contractDetailService.save(contractDetail);

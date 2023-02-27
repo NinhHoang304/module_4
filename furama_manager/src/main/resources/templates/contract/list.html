@@ -227,7 +227,9 @@
     </div>
 </div>
 <!-- Modal Create Contract-->
-<div class="modal fade" id="createContract" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div th:class="${hasErr=='true'? 'modal fade show':'modal fade'}"
+     th:style="${hasErr =='true' ?'display:block':'display:none'}"
+        class="modal fade" id="createContract" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -238,6 +240,7 @@
                 <div class="modal-body">
                     <div class="row mb-2">
                         <span class="col-3">Start Date:</span>
+                        <span th:if="${checkDate}" th:text="${checkDate}"></span>
                         <div class="col-9"><input id="startDate" type="date" class="form-control"></div>
                     </div>
                     <div class="row mb-2">
