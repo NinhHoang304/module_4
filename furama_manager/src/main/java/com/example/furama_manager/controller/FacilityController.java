@@ -1,5 +1,6 @@
 package com.example.furama_manager.controller;
 
+import com.example.furama_manager.dto.FacilityDto;
 import com.example.furama_manager.model.Facility;
 import com.example.furama_manager.model.FacilityType;
 import com.example.furama_manager.model.RentType;
@@ -41,6 +42,7 @@ public class FacilityController {
         model.addAttribute("facilityTypeList", facilityTypeList);
         model.addAttribute("rentTypeList", rentTypeList);
         model.addAttribute("facility", new Facility());
+        model.addAttribute("facilityDto", new FacilityDto());
         return "/facility/list";
     }
 

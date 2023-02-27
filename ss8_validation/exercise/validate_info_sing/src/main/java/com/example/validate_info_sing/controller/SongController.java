@@ -37,7 +37,7 @@ public class SongController {
     public String add(@Validated @ModelAttribute SongDto songDto, BindingResult bindingResult, Model model,
                       RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
-            model.addAttribute("songDto", songDto);
+            model.addAttribute("so  ngDto", songDto);
             return "/create";
         }
         Song song = new Song();

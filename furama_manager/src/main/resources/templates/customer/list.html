@@ -182,16 +182,17 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Create Customer</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/customer/create}" method="post" th:object="${customer}">
+            <form th:action="@{/customer/create}" method="post" th:object="${customerDto}">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Name:</label>
+                        <span th:field="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red"></span>
                         <input th:field="*{name}" type="text" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Date Of Birth:</label>
+                        <span th:field="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}" style="color: red"></span>
                         <input th:field="*{dayOfBirth}" type="date" class="form-control">
                     </div>
                     <div class="form-check form-check-inline">
@@ -210,16 +211,19 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Id card:</label>
+                        <span th:field="${#fields.hasErrors('idCard')}" th:errors="*{idCard}" style="color: red"></span>
                         <span th:if="${error}" th:text="${error}" style="color: red"></span>
                         <input th:field="*{idCard}" type="text" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone number:</label>
+                        <span th:field="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" style="color: red"></span>
                         <span th:if="${error}" th:text="${error}" style="color: red"></span>
                         <input th:field="*{phoneNumber}" type="text" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
+                        <span th:field="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red"></span>
                         <span th:if="${error}" th:text="${error}" style="color: red"></span>
                         <input th:field="*{email}" type="email" class="form-control" placeholder="name@example.com">
                     </div>
@@ -240,7 +244,9 @@
                     <!--                end body modal-->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <a th:href="@{/customer}">Close</a>
+                    </button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
@@ -255,7 +261,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel1">Edit Customer</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/customer/edit}" method="post" th:object="${customer}">
+            <form th:action="@{/customer/edit}" method="post" th:object="${customerDto}">
                 <div class="modal-body">
                     <input th:field="*{id}" id="customerId" type="text" hidden>
                     <div class="mb-3">
