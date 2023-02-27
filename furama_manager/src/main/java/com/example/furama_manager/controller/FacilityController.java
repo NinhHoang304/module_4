@@ -7,12 +7,15 @@ import com.example.furama_manager.model.RentType;
 import com.example.furama_manager.service.IFacilityService;
 import com.example.furama_manager.service.IFacilityTypeService;
 import com.example.furama_manager.service.IRentTypeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,7 +50,21 @@ public class FacilityController {
     }
 
     @PostMapping("/create")
-    public String addFacility(@ModelAttribute Facility facility, RedirectAttributes redirectAttributes){
+    public String addFacility(@Validated @ModelAttribute FacilityDto facilityDto, BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes, Model model){
+        if (bindingResult.hasErrors()){
+            Page<Facility> facilityPage = this.facilityService.getAllFacilityByQuery("", "", PageRequest.of(0, 4));
+            model.addAttribute("facilityPage", facilityPage);
+            List<FacilityType> facilityTypeList = this.facilityTypeService.findAll();
+            List<RentType> rentTypeList = this.rentTypeService.findAll();
+            model.addAttribute("facilityTypeList", facilityTypeList);
+            model.addAttribute("rentTypeList", rentTypeList);
+            model.addAttribute("facilityDto", facilityDto);
+            model.addAttribute("hasErr", "true");
+            return "facility/list";
+        }
+        Facility facility = new Facility();
+        BeanUtils.copyProperties(facilityDto, facility);
         this.facilityService.save(facility);
         redirectAttributes.addFlashAttribute("mess", "Add Success!");
         return "redirect:/facility";

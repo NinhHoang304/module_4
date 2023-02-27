@@ -26,7 +26,6 @@ public class CustomerDto implements Validator {
     private String phoneNumber;
     @Pattern(regexp = "^[\\w.+\\-]+@gmail\\.com$", message = "Sai định dạng (@gmail.com)")
     private String email;
-
     private String address;
     private boolean deleted;
 
@@ -138,14 +137,18 @@ public class CustomerDto implements Validator {
     public void validate(Object target, Errors errors) {
         CustomerDto customerDto = (CustomerDto) target;
         String dateOfBirth = customerDto.getDayOfBirth();
-        LocalDate birth = LocalDate.parse(dateOfBirth);
-        LocalDate currentDate = LocalDate.now();
-        int age = Period.between(birth, currentDate).getYears();
+        if (!dateOfBirth.isEmpty()){
+            LocalDate birth = LocalDate.parse(dateOfBirth);
+            LocalDate currentDate = LocalDate.now();
+            int age = Period.between(birth, currentDate).getYears();
 
-        if (age < 18){
-            errors.rejectValue("dayOfBirth", "error123", "Bạn dưới 18 tuổi");
-        } else if (age > 100) {
-            errors.rejectValue("dayOfBirth", "error123323", "Tuổi không hợp lệ > 100 tuổi");
+            if (age < 18){
+                errors.rejectValue("dayOfBirth", "error123", "Bạn dưới 18 tuổi");
+            } else if (age > 100) {
+                errors.rejectValue("dayOfBirth", "error123323", "Tuổi không hợp lệ > 100 tuổi");
+            }
+        } else {
+            errors.rejectValue("dayOfBirth", "error1233", "Ngày sinh không được để trống");
         }
     }
 }

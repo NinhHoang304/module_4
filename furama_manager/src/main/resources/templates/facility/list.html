@@ -184,14 +184,16 @@
     <!--End Footer-->
 </div>
 <!-- Modal Create-->
-<div class="modal fade" id="createCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div th:class="${hasErr=='true'? 'modal fade show':'modal fade'}"
+     th:style="${hasErr =='true' ?'display:block':'display:none'}"
+        class="modal fade" id="createCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Create Facility</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/facility/create}" method="post" th:object="${facility}">
+            <form th:action="@{/facility/create}" method="post" th:object="${facilityDto}">
                 <div style="margin: 5px 0 0 100px">
                     <button type="button" class="btn btn-primary" onclick="addVilla()">
                         Add Villa
@@ -215,11 +217,13 @@
                         <div class="col-9"><input th:field="*{area}" type="text" class="form-control"></div>
                     </div>
                     <div class="row mb-2">
-                        <span class="col-3">Cost:</span>
+                        <label class="col-3">Cost:</label>
+                        <span th:field="${#fields.hasErrors('cost')}" th:errors="*{cost}" style="color: red"></span>
                         <div class="col-9"><input th:field="*{cost}" type="text" class="form-control"></div>
                     </div>
                     <div class="row mb-2">
-                        <span class="col-3">Max People:</span>
+                        <label class="col-3">Max People:</label>
+                        <span th:field="${#fields.hasErrors('maxPeople')}" th:errors="*{maxPeople}" style="color: red"></span>
                         <div class="col-9"><input th:field="*{maxPeople}" type="text" class="form-control"></div>
                     </div>
                     <div class="row mb-2" id="standardRoom">
@@ -236,7 +240,8 @@
                         <div class="col-9"><input th:field="*{poolArea}" type="text" class="form-control"></div>
                     </div>
                     <div class="row mb-2" id="numberOfFloors">
-                        <span class="col-3">Number Of Floor:</span>
+                        <label class="col-3">Number Of Floor:</label>
+                        <span th:field="${#fields.hasErrors('numberOfFloors')}" th:errors="*{numberOfFloors}" style="color: red"></span>
                         <div class="col-9"><input th:field="*{numberOfFloors}" type="text" class="form-control"></div>
                     </div>
                     <div class="row mb-2" id="facilityFree">
@@ -270,7 +275,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel1">Facility Edit</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/facility/edit}" method="post" th:object="${facility}">
+            <form th:action="@{/facility/edit}" method="post" th:object="${facilityDto}">
                 <div class="modal-body">
                     <input th:field="*{id}" id="idEdit" type="number" hidden>
                     <input th:field="*{deleted}" th:value="0" type="text" hidden>
