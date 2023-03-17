@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="af53eb4d-bf0d-4173-b417-965ba5602b89" name="Changes" comment="">
+    <list default="true" id="dcd164e6-af11-4506-aef1-a0ca3131e8ca" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/controller/CoachController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/model/Coach.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/model/CoachType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/model/Departure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/model/Destination.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/repository/ICoachRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/repository/ICoachTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/repository/IDepartureRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/repository/IDestinationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/service/ICoachService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../complete-final-exam/src/main/java/com/example/completefinalexam/service/impl/CoachServiceImpl.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../final_exam/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../final_exam/build.gradle" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../final_exam/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
@@ -73,9 +81,9 @@
       <change afterPath="$PROJECT_DIR$/../final_exam/src/main/resources/templates/list.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../final_exam/src/test/java/com/example/final_exam/FinalExamApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../furama_manager/src/main/java/com/example/furama_manager/controller/ContractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../furama_manager/src/main/java/com/example/furama_manager/controller/ContractController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/giai_thuat_ca_nhan/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/giai_thuat_ca_nhan/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../giai_thuat_ca_nhan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../giai_thuat_ca_nhan/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../giai_thuat_ca_nhan/out/production/giai_thuat_ca_nhan/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../giai_thuat_ca_nhan/out/production/giai_thuat_ca_nhan/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../giai_thuat_ca_nhan/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../giai_thuat_ca_nhan/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,79 +93,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2LlhpCftNR6NR4HCqW7HIc1JCXE" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2N8MMmelt1A0yrIlXfgTzIc61vv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Codegym/module 4/giai_thuat_ca_nhan&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/Codegym/module 4/furama_manager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="giai_thuat_ca_nhan" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
-  </component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="af53eb4d-bf0d-4173-b417-965ba5602b89" name="Changes" comment="" />
-      <created>1676451757783</created>
+      <changelist id="dcd164e6-af11-4506-aef1-a0ca3131e8ca" name="Changes" comment="" />
+      <created>1679041209772</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1676451757783</updated>
-      <workItem from="1676451758918" duration="1957000" />
-      <workItem from="1676455058452" duration="438000" />
-      <workItem from="1677056840014" duration="2352000" />
-      <workItem from="1677059471909" duration="18000" />
-      <workItem from="1677059597171" duration="18000" />
-      <workItem from="1677059648981" duration="83000" />
-      <workItem from="1678266159878" duration="4596000" />
-      <workItem from="1678326678612" duration="812000" />
+      <updated>1679041209772</updated>
+      <workItem from="1679041210879" duration="36000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

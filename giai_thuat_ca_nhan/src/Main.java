@@ -1,45 +1,32 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("nhap n: ");
-//        int n = Integer.parseInt(scanner.nextLine());
-//
-//        int k = n / 2;
-//        for (int i = 1; i <= k + 1; i++) {
-//            for (int j = 1; j <= i; j++) {
-//                if (j == 1 || j == i) {
-//                    System.out.print("*");
-//                } else {
-//                    System.out.print(" ");
-//                }
-//            }
-//            System.out.println();
-//        }
-//
-//        for (int i = k; i >= 1; i--) {
-//            for (int j = i; j >= 1; j--) {
-//                if (j == 1 || j == i) {
-//                    System.out.print("*");
-//                } else {
-//                    System.out.print(" ");
-//                }
-//            }
-//            System.out.println();
-//        }
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+        int result = coinChange(coins, amount);
+        System.out.println(result); // output: 3
 
+        int[] coins2 = {2};
+        int amount2 = 3;
+        int result2 = coinChange(coins2, amount2);
+        System.out.println(result2); // output: -1
+
+        
     }
-    public static int solution(int[] nums) {
-        int temp = 0;
-        for (int i = 0; i <= nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                if (i == nums[j]){
-                    break;
+
+    public static int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
                 }
-                temp = i;
             }
         }
-        return temp;
+        return dp[amount] > amount ? -1 : dp[amount];
     }
 }

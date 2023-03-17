@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CodeGym</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap-5.3.0/css/bootstrap.min.css"
+          th:href="@{/bootstrap-5.3.0/css/bootstrap.min.css}">
+
+</head>
+<body style="cursor: auto; background-color: #eff2f4">
+<div class="w-100" style="min-height: 300px; background-color: #5e72e4; position: absolute;"></div>
+<div class="container-fluid">
+    <!--Header-->
+    <div id="header" class="row">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-start">
+                    <a class="navbar-brand" style="color: white; font-weight: bold">
+                        CodeGym
+                    </a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn btn-outline-light">
+                        <span style="font-weight: bold">Login</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--End Header-->
+    <div class="row">
+        <div class="col-2">
+            <!--Item Link-->
+            <div id="item-link">
+                <p style="text-align: center; color: #344767; font-weight: bold;">DashBoard</p>
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action" aria-current="true">
+                        The current button
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">A second button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A button item</button>
+                </div>
+            </div>
+            <!--End Item Link-->
+        </div>
+        <div class="col-10">
+            <!--Header Link-->
+            <div class="row" style="width: 100%">
+                <div id="header-link" class="col-12">
+                    <nav class="navbar navbar-expand-lg" style="margin-left: 50px">
+                        <div class="container-fluid">
+                            <div class="d-flex justify-content-start">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">Tranh</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">Thể Loại</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">Địa chỉ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link">Giới Thiệu</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <form action="" method="get" class="d-flex" role="search">
+                                    <select name="tenTheLoai" style="margin-left: 5px" class="form-select" aria-label="Default select example">
+                                        <option value="">---------Select--------</option>
+                                        <th:block th:each="row : ${theLoaiList}">
+                                            <option th:value="${row.tenTheLoai}" th:text="${row.tenTheLoai}"></option>
+                                        </th:block>
+                                    </select>
+                                    <input value="" name="tenTacPham" class="form-control me-2" type="search"
+                                           placeholder="Nhập tên tác phẩm" aria-label="Search" style="margin-left: 5px">
+                                    <button class="btn btn btn-outline-light" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!--End Header Link-->
+            <!--Content-->
+            <div class="row" style="width: 100%">
+                <div id="content" class="col-12" style="padding-top: 5px">
+                    <h4 style="text-align: center">Danh sách Tranh</h4>
+                    <div style="margin-bottom: 10px">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
+                            Add New
+                        </button>
+                    </div>
+                    <span th:if="${mess}" th:text="${mess}"></span>
+                    <!--List-->
+                    <div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên tác phẩm</th>
+                                <th>Hoạ sĩ</th>
+                                <th>Năm vẽ</th>
+                                <th>Kích thước</th>
+                                <th>Thể loại</th>
+                                <th>Xoá</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="tranh,rowStat : ${tranhPage}">
+                                <td th:text="${rowStat.count}"></td>
+                                <td th:text="${tranh.tenTacPham}"></td>
+                                <td th:text="${tranh.hoaSi}"></td>
+                                <td th:text="${tranh.namVe}"></td>
+                                <td th:text="${tranh.kichThuoc}"></td>
+                                <td th:text="${tranh.theLoai.tenTheLoai}"></td>
+                                <td>
+                                    <button th:attr="onclick=|getInfoDelete('${tranh.id}', '${tranh.tenTacPham}')|"
+                                            type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
+                                        Xoá
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Pagination-->
+                    <div style="float: right; margin-right: 15px">
+                        <a th:href="@{tranh(page=${tranhPage.number - 1})}" th:if="${tranhPage.hasPrevious()}" class="btn btn-primary">Previous</a>
+                        <span th:text="${tranhPage.number + 1}"></span> / <span th:text="${tranhPage.totalPages}"></span>
+                        <a th:href="@{tranh(page=${tranhPage.number + 1})}" th:if="${tranhPage.hasNext()}" class="btn btn-primary">Next</a>
+                    </div>
+                </div>
+            </div>
+            <!--End Content-->
+        </div>
+    </div>
+    <!--Footer-->
+    <div id="footer" class="row">
+        <div class="d-flex justify-content-center align-items-center">@CodeGym2023</div>
+    </div>
+    <!--End Footer-->
+</div>
+<!-- Modal Create-->
+<div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create</h1>
+            </div>
+            <form th:action="@{tranh/create}" method="post" th:object="${tranh}">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Tên tác phẩm:</label>
+                        <input required th:field="*{tenTacPham}" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tên hoạ sĩ:</label>
+                        <input required th:field="*{hoaSi}" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Năm vẽ:</label>
+                        <input required th:field="*{namVe}" type="number" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kích thước:</label>
+                        <input required th:field="*{kichThuoc}" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label>Chọn thể loại:</label>
+                        <select th:field="*{theLoai.id}" class="form-select" aria-label="Default select example">
+                            <th:block th:each="row : ${theLoaiList}">
+                                <option th:value="${row.id}" th:text="${row.tenTheLoai}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <!--end body modal-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal Delete -->
+<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel3">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{tranh/delete}" method="post">
+                <div class="modal-body">
+                    <input hidden type="text" id="deleteId" name="deleteId">
+                    <span>Do you want to delete this </span>
+                    <span style="color: red" id="deleteName"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function getInfoDelete(id, name){
+        document.getElementById("deleteId").value = id;
+        document.getElementById("deleteName").innerText = name;
+    }
+</script>
+</body>
+<script src="../static/bootstrap-5.3.0/js/bootstrap.min.js"
+        th:src="@{/bootstrap-5.3.0/js/bootstrap.min.js}"></script>
+</html>

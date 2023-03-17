@@ -76,8 +76,8 @@ public class ContractController {
         LocalDate startDate = LocalDate.parse(checkInDate);
         LocalDate endDate = LocalDate.parse(checkOutDate);
         LocalDate currentDate = LocalDate.now();
-        int yearOfStartDate = Period.between(startDate, currentDate).getYears();
-        int yearOfEndDate = Period.between(endDate, currentDate).getYears();
+        int yearOfStartDate = Period.between(startDate, currentDate).getDays();
+        int yearOfEndDate = Period.between(endDate, currentDate).getDays();
         if (yearOfStartDate < yearOfEndDate){
             redirectAttributes.addFlashAttribute("checkDate", "Start date không được nhỏ hơn End date");
             redirectAttributes.addFlashAttribute("hasErr", "true");
